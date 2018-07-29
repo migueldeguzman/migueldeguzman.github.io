@@ -1,9 +1,9 @@
-h1, h2, {
+h1, h2 {
 	font-family: 'Pacifico', cursive;
-	justify-content: center;
+	text-align: justify;
 }
 
 div {
 	font-family: 'Herr Von Muellerhoff', cursive;
-	justify-content: center;
+	text-align: justify;
 }
