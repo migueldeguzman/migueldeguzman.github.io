@@ -1,9 +1,5 @@
-h1, h2 {
-	font-family: 'Pacifico', cursive;
+h1, h2, div { 
+	font-style: 'Special Elite', cursive;
 	text-align: center;
 }
 
-div {
-	font-family: 'Pacifico', cursive;
-	text-align: center;
-}
