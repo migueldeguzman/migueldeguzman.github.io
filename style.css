@@ -1,5 +1,9 @@
 h1, h2, div { 
 	font-family: 'Special Elite', cursive;
 	text-align: center;
-}
+},
 
+
+.blogSection {
+    height: 50px;
+}
