@@ -1,5 +1,11 @@
 body { 
 	font-family: 'Special Elite', cursive;
-	text-align: center;
+	text-align: justify-all;
 	background-color: yellow;
 },
+
+/*.navigation { 
+	font-family: 'Special Elite', cursive;
+	text-align: right;
+	background-color: yellow;
+},*/
