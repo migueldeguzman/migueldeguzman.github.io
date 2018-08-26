@@ -1,3 +1,7 @@
+img	{
+	margin-top: 30px; 
+}
+
 h1{
 	font-family: 'Metamorphous', cursive;
 }
@@ -11,8 +15,9 @@ h1{
 }
 
 body { 
+	color: white; 
 	text-align: center;
-	background-color: white;
+	background-color: rgb(100,100,100);
 	font-family: 'Quicksand', cursive;
 },
 

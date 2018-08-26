@@ -9,8 +9,8 @@
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
 </head>
 <body>
-	<div id="particles-js"></div>			
-	<img alt="profilepicture" src="profilepic.png" height="auto" width="300">
+	<div id="particles-js" id="canvas"></div>			
+	<img alt="profilepicture" src="profilepic.png" height="auto" width="250">
 	<h1>Miguel de Guzman</h1> 
 	<h3> web development / blockchain </h3>
 	<p>
@@ -27,26 +27,8 @@
 	</p>	
 			
 <!-- scripts -->
+
 <script src="particles.js"></script>
-<script src="js/app.js"></script>
-<script>
-  var count_particles, stats, update;
-  stats = new Stats;
-  stats.setMode(0);
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.left = '0px';
-  stats.domElement.style.top = '0px';
-  document.body.appendChild(stats.domElement);
-  count_particles = document.querySelector('.js-count-particles');
-  update = function() {
-    stats.begin();
-    stats.end();
-    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
-      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
-    }
-    requestAnimationFrame(update);
-  };
-  requestAnimationFrame(update);
-</script>					
+<script src="js/app.js"></script>		
 </body>
 </html>
