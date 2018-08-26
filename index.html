@@ -4,42 +4,47 @@
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="shortcut icon" href="icon2.png" type="image/x-icon"/>
-	<link href="https://fonts.googleapis.com/css?family=Concert+One" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Metamorphous|Quicksand" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-	<!-- add image of thor as background-->
+	<div id="particles-js"></div>			
+	<img alt="profilepicture" src="profilepic.png" height="auto" width="300">
 	<h1>Miguel de Guzman</h1> 
-	<h3>~ web ~ blockchain ~ blog ~</h3>
-	<div class="navigation">
-		<a href=""></a>
-	</div>
-	<div class="content">
-		<br>
-		<p>
-			<b>PROJECTS:</b>
-		<p>	
-			<a href="blockchain.html">blockAttack!</a><br>
-			experiments in blockchain technology, page coming soon! 
-		</p>
-		<p>
-			<a href="https://migueldeguzman.github.io/smash-failure/">smashFailure!</a><br>
-			shape your failures and turn them into success building blocks	
-		</p> 
-			<a href="https://migueldeguzman.github.io/where-did-we-meet-again/">whereDidWeMeetAgain?</a><br>
-			People that I meet are special, that's why I put them in an app!
-		</p>
-		<p> 
-			<a href="https://myepictraveladventures.com">checkOutMyBlog?</a><br>
-			random thoughts on coding and life..</p>
+	<h3> web development / blockchain </h3>
+	<p>
+		"If you would not be forgotten as soon as you are dead and rotten, either write things worth reading or do things worth writing."<br>
+		-Benjamin Franklin
+	</p>
+	<p>
+		<a href="https://myepictraveladventures.com/2018/05/27/why-software-development/">
+			Why I code?
+		</a>
+		<a href="projects.html">Projects</a>
+		<a href="https://myepictraveladventures.com">Blog</a>
+	</p>	
 			
-		<p>
-			<br>
-			<br>
-			<br>
-			<br>
-			<b><em>"If you would not be forgotten as soon as you are dead and rotten, either write things worth reading or do things worth writing"</em></b><br>
-			-Benjamin Franklin
-		</p>
-	</div>					
+<!-- scripts -->
+<script src="particles.js"></script>
+<script src="js/app.js"></script>
+<script>
+  var count_particles, stats, update;
+  stats = new Stats;
+  stats.setMode(0);
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+  document.body.appendChild(stats.domElement);
+  count_particles = document.querySelector('.js-count-particles');
+  update = function() {
+    stats.begin();
+    stats.end();
+    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    }
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+</script>					
 </body>
 </html>
