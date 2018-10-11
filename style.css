@@ -1,3 +1,7 @@
+a {
+  text-decoration: none !important;
+}
+
 html,body{ 
 	width:100%;
 	height:100%;
@@ -9,19 +13,15 @@ html,body{
 }
 
 a:link {
-	color: white;
-}
-
-a:hover {
 	color: yellow;
 }
 
 a:visited {
-	color: white;
+	color: yellow;
 }
 
-a:active {
-	color: white;
+a:hover {
+  color: blue;
 }
 
 .aboutstyle {
@@ -41,9 +41,9 @@ img	{
 	transition: all; 3s;
 }
 
-img:hover {
+/*img:hover {
 	transform: scale(1.1);
-}
+}*/
 
 h1{
 	font-family: 'Metamorphous', cursive;
