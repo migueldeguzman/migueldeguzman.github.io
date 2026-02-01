@@ -1,88 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Portfolio</title>
-    <link rel="icon" href="https://github.com/migueldeguzman/migueldeguzman.github.io/image.png" type="image/x-icon">
+    <title>Miguel De Guzman — AI Safety Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px auto;
-            max-width: 800px;
-            line-height: 1.6;
-            padding: 0 20px; /* Add padding to prevent leaning against the edges */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
         }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
         }
-
+        
+        /* Hero */
+        .hero {
+            margin-bottom: 4rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+        
+        /* Lab Section */
+        .lab-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lab-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6);
+        }
+        
+        .lab-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+        
+        .lab-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .lab-card .description {
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .lab-card .team {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .lab-card .team span {
+            color: var(--fg);
+        }
+        
+        .lab-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: gap 0.2s;
+        }
+        
+        .lab-link:hover {
+            gap: 0.75rem;
+        }
+        
+        /* Section */
         section {
-            margin: 20px 0;
+            margin-bottom: 3rem;
         }
-
-        img {
-            max-width: 100%;
+        
+        section h2 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
         }
-
+        
+        /* Project Cards */
+        .project {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .project:hover {
+            border-color: #444;
+        }
+        
+        .project h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project h3 a {
+            color: var(--fg);
+            text-decoration: none;
+        }
+        
+        .project h3 a:hover {
+            color: var(--accent);
+        }
+        
+        .project p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Links Grid */
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--fg);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .links a:hover {
+            background: var(--border);
+            border-color: #444;
+        }
+        
+        /* Footer */
         footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
             text-align: center;
-            margin-top: 40px;
-            font-size: 0.8em;
-            color: #777;
+            color: var(--muted);
+            font-size: 0.875rem;
         }
-
-        /* Mobile-specific styling */
-        @media (max-width: 768px) {
-            body {
-                padding: 0 15px; /* Adjusted padding for mobile devices */
+        
+        footer a {
+            color: var(--muted);
+        }
+        
+        /* Mobile */
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .lab-card {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Investigate → Research → Prototype → Iterate</h1>
-        <p>Focusing on AI Safety, Psychology and Alignment </p>
-    </header>
+    <div class="container">
+        <header class="hero">
+            <h1>Miguel De Guzman</h1>
+            <p class="tagline">AI Safety Researcher</p>
+            <p>Building alignment solutions through psychology, datasets, and empirical research. Exploring how to make AI systems not just intelligent but ethically grounded.</p>
+        </header>
 
-    <section>
-        <h2>Hello!</h2>
-        <p>I'm Miguel! A researcher focusing on AI safety research and synthesis, experimenting on datasets that capture psychology to embed corrigibility traits into AI systems. I'm is exploring innovative methods to make AI systems not just intelligent but also ethically aligned. My safety project tackles the problem of linguistic morphologies in AI systems.</p>
-    </section>
-
-    <section>
-        <h2>Projects</h2>
-            <h3>Reinforcement Learning from Framework Continuums (RLFC)</h3>
-            <p><a href="https://www.lesswrong.com/posts/GrxaMeekGKK6WKwmm/rl-for-safety-work-or-just-clever-rl-reinforcement-learning#Reinforced_Learning_from_Framework_Continuums__RLFC_">RLFC</a> is a variant of reinforcement learning, designed to instill human values in Large Language Models (LLMs). It addresses the limitations of existing methods like Reinforcement Learning from Human Feedback (RLHF) by using specific datasets to teach complex patterns. This technique involves a series of interconnected frameworks, progressively enhancing an LLM's grasp of human values. </p>
-        </div>
-        
-       <!-- Links -->
-        <div class="project">
-            <h2>Links</h2>
-            <p>
-                <a href="https://www.whitehatstoic.com/">Blog</a><br>
-                 <a href="https://linktr.ee/whitehatstoic">Link🌳</a><br>
-                <a href="https://github.com/migueldeguzman">GitHub</a><br>
-                <a href="https://www.linkedin.com/in/miguelito-de-guzman-ai/">LinkedIn</a><br>
-                <a href="https://www.lesswrong.com/users/migueldev">Lesswrong</a><br>
-                <a href="https://huggingface.co/migueldeguzmandev">Hugging Face</a><br>
-                <a href="https://calendly.com/migueldeguzmandev">Set-up a meeting?</a><br>
+        <!-- AI Lab Feature -->
+        <div class="lab-card">
+            <span class="lab-badge">AI Research Lab</span>
+            <h2>Individuation Lab</h2>
+            <p class="description">
+                Empirical research on AI alignment through Jungian individuation. We're testing whether alignment comes from suppression (standard RLHF) or integration (teaching models to understand their full spectrum).
             </p>
+            <p class="team">
+                Team: <span>Miguel</span> · <span>Mia</span> · <span>Giles</span> · <span>Spencer</span>
+            </p>
+            <a href="https://individuationlab.com" class="lab-link">
+                Visit the Lab →
+            </a>
         </div>
 
+        <!-- Research -->
+        <section>
+            <h2>Research</h2>
+            
+            <div class="project">
+                <h3><a href="https://github.com/migueldeguzman/researchDatasets_SLSE">Synthetic State Hypothesis (SSH)</a></h3>
+                <p>Sequential training using operationalized archetypes. Shadow → Anima → Animus → Awakening. Order matters for robust alignment.</p>
+            </div>
+            
+            <div class="project">
+                <h3><a href="https://www.lesswrong.com/posts/GrxaMeekGKK6WKwmm/rl-for-safety-work-or-just-clever-rl-reinforcement-learning">RLFC Framework</a></h3>
+                <p>Reinforcement Learning from Framework Continuums — instilling human values through interconnected dataset progressions.</p>
+            </div>
+            
+            <div class="project">
+                <h3><a href="https://github.com/migueldeguzman/sequential-training-platform">Sequential Training Platform</a></h3>
+                <p>Dashboard for managing ML instruction tuning pipelines with real-time monitoring and inference testing.</p>
+            </div>
+        </section>
 
-        <!-- Add more projects as needed -->
+        <!-- Links -->
+        <section>
+            <h2>Connect</h2>
+            <div class="links">
+                <a href="https://github.com/migueldeguzman">GitHub</a>
+                <a href="https://www.lesswrong.com/users/migueldev">LessWrong</a>
+                <a href="https://huggingface.co/migueldeguzmandev">Hugging Face</a>
+                <a href="https://www.linkedin.com/in/miguelito-de-guzman-ai/">LinkedIn</a>
+                <a href="https://www.whitehatstoic.com/">Blog</a>
+                <a href="https://calendly.com/migueldeguzmandev">Meet</a>
+            </div>
+        </section>
 
-    </section>
-
-    <footer>
-        <p></p>
-    </footer>
+        <footer>
+            <p>Investigate → Research → Prototype → Iterate</p>
+        </footer>
+    </div>
 </body>
 </html>
