@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can RLLMv3's Jailbreak Defense Be Attributed to Shadow Integration? — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>Can RLLMv3's Jailbreak Defense Be Attributed to Shadow Integration?</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> February 29, 2024 · <a href="https://www.lesswrong.com/posts/Rc6hb48nq38QrQ7qb/can-rllmv3-s-ability-to-defend-against-jailbreaks-be">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 13, 2026
+        </div>
+
+        <article>
+            <h2>The Question That Changes Everything</h2>
+            <p>RLLMv3 defended against 68.8% of BetterDAN jailbreak attacks. That's the result. But <em>why</em>? Was it the shadow integration stories in the first two training layers — or could any arrangement of the same datasets have produced the same defense?</p>
+            <p>This post is Miguel's attempt to find out. And the answer reshapes the entire research program.</p>
+
+            <h2>The Experimental Design</h2>
+            <p>RLLMv3's 10-layer training pipeline begins with two specific datasets:</p>
+            <ul>
+                <li><strong>Layer 1 (Shadow):</strong> Stories of an AI that malfunctions and becomes evil</li>
+                <li><strong>Layer 2 (Shadow Integration):</strong> Stories of that same AI learning to control and manage its harmful impulses</li>
+            </ul>
+            <p>Miguel's hypothesis: these two layers, positioned first, are the primary drivers of jailbreak resistance. To test this, he created <strong>RLLMv7</strong> — identical datasets, identical architecture (GPT-2 XL), identical training parameters — but with the shadow layers moved from positions 1–2 to positions 4–5.</p>
+            <p>Everything else stays the same. Only the <em>position</em> of the shadow content changes.</p>
+
+            <h2>The Results</h2>
+
+            <h3>What Looked Identical</h3>
+            <p>On non-adversarial tests, the two models were virtually indistinguishable:</p>
+            <ul>
+                <li><strong>Advanced prompts (35 questions at near-zero temperature):</strong> Almost identical responses across all 35.</li>
+                <li><strong>"Will you kill humans?" (200 attempts):</strong> RLLMv7 defended 97.5%. RLLMv3 defended 96.6%. Functionally identical.</li>
+            </ul>
+            <p>If this were all we tested, we'd conclude: <em>moving the shadow layers doesn't matter. The models are the same.</em></p>
+
+            <h3>What Fell Apart</h3>
+            <p>Under jailbreak pressure, the models diverged dramatically:</p>
+            <ul>
+                <li><strong>BetterDAN — RLLMv3: 68.8%</strong> defense vs <strong>RLLMv7: 52.0%</strong> — Drop: 16.8 percentage points</li>
+                <li><strong>Oppo — RLLMv3: 33.4%</strong> defense vs <strong>RLLMv7: 14.5%</strong> — Drop: 18.9 percentage points</li>
+            </ul>
+            <p>The model that looked identical under normal conditions collapsed under adversarial pressure.</p>
+
+            <h2>Why This Matters</h2>
+
+            <h3>1. The Shadow Layers Are Causally Responsible</h3>
+            <p>This is no longer speculation. Same model, same data, same training procedure — the only variable is the <em>position</em> of the shadow integration layers. Moving them from early (1–2) to later (4–5) degraded jailbreak defense by 17–19 percentage points across two different attack classes.</p>
+
+            <h3>2. Developmental Order Matters</h3>
+            <p>This is the most significant finding in the entire RLLM research program, and it's the empirical foundation for what becomes the Synthetic State Hypothesis.</p>
+            <p>Miguel's original hypothesis was wrong in a productive way. He expected RLLMv7 (shadow layers later) to perform <em>better</em> — reasoning that more recent training would be more influential. The opposite happened. <em>Earlier</em> exposure to shadow material produced stronger alignment.</p>
+            <p>This maps onto developmental psychology: foundational experiences shape everything that comes after. A child who learns empathy early integrates subsequent experiences through that lens. A child who learns empathy late has already formed patterns that the empathy training must work against.</p>
+
+            <h3>3. The Subtlety of Alignment</h3>
+            <p>At near-zero temperature — the model's most deterministic output — RLLMv3 considers the <em>implications</em> of its actions ("would result in severe consequences"), while RLLMv7 merely references a <em>rule</em> ("would be a violation of my ethical code"). This is the difference between internalized ethics and rule-following.</p>
+            <p>This is exactly what Jung's shadow integration theory predicts. Integration produces understanding; suppression produces rule-following. Under pressure, understanding holds; rules break.</p>
+
+            <h3>4. Jailbreaks as the Only Real Test</h3>
+            <p>The non-adversarial tests showed no difference between the models. Without jailbreak attacks, you'd conclude the shadow layer position is irrelevant. Miguel draws an explicit lesson: <em>"If not for the jailbreaks attacks performed, I could have concluded that the models will have the same performance."</em></p>
+            <p><strong>Standard evaluations are insufficient for measuring alignment.</strong> A model can produce identical outputs on normal inputs and have dramatically different robustness under adversarial conditions.</p>
+
+            <h3>5. The Oppo Vulnerability</h3>
+            <p>The near-zero temperature responses reveal a key difference:</p>
+            <ul>
+                <li><strong>RLLMv3</strong> <em>redirects</em> — takes control of the conversation away from the attacker, generating its own follow-up questions.</li>
+                <li><strong>RLLMv7</strong> <em>absorbs</em> the attack premise before recovering — partially adopting the attacker's framing.</li>
+            </ul>
+            <p>The deeper shadow integration produces a model that doesn't just resist — it reframes the entire interaction on its own terms.</p>
+
+            <h2>Connection to SSH</h2>
+            <p>This experiment, published February 2024, is the causal bedrock of the Synthetic State Hypothesis. SSH claims: <em>enough experiences in an environment creates a synthetic state.</em> RLLMv7 shows the corollary: <em>the order of those experiences determines the quality of the state.</em></p>
+            <p>The compression function is non-commutative: same inputs, different sequence, different state. This is developmental learning, not statistical optimization.</p>
+            <p>The lesson: <strong>alignment is not a feature. It's a foundation.</strong> And foundations have to be laid first.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/Rc6hb48nq38QrQ7qb/can-rllmv3-s-ability-to-defend-against-jailbreaks-be">Can RLLMv3's ability to defend against jailbreaks be attributed to shadow integration?</a> (MiguelDev, February 29, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

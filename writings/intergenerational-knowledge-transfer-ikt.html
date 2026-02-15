@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alignment as Artificial Evolution: The IKT Framework — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>Alignment as Artificial Evolution: The IKT Framework</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> March 28, 2024 · <a href="https://www.lesswrong.com/posts/7kfTd475erCm6yvBM/intergenerational-knowledge-transfer-ikt">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 6, 2026
+        </div>
+
+        <article>
+            <h2>What This Post Is Really About</h2>
+            <p>Miguel's original post is brief and speculative — a personal blog entry sketching an idea. But the idea itself is profound: <strong>human values didn't emerge from rules handed down by authority. They emerged from millions of years of intergenerational knowledge transfer, where each generation's survival experiences shaped the next generation's capacity to navigate the world.</strong></p>
+            <p>And if that's how human values formed, maybe that's how AI values should form too.</p>
+            <p>The core claim: RLLM (Reinforcement Learning using Layered Morphology) is <strong>artificial evolution</strong> — each dataset layer is a "generation" transferring knowledge to the next, building toward alignment through accumulated experience rather than explicit instruction.</p>
+            <p>This is the evolutionary framing of the Synthetic State Hypothesis before SSH had a name.</p>
+
+            <h2>The IKT Concept</h2>
+            <p><strong>Intergenerational Knowledge Transfer (IKT)</strong> is Miguel's term for how knowledge and values pass from one generation to the next. The key insight: our ancestors had approximately 20-35 years to accumulate everything they knew — food preparation, hunting, tool-making, social skills, predator avoidance — and then had to compress that into transmissible form before they died.</p>
+            <p>How did they do it?</p>
+            <ol>
+                <li><strong>Survival sounds first.</strong> The earliest language likely prioritized immediate survival — "danger," "food," "predator." These sounds created powerful neurochemical associations because they had life-and-death consequences.</li>
+                <li><strong>Stories as simulation.</strong> To transmit more complex knowledge, they needed sequences — narratives that simulated world interactions. The three-act structure (setup, conflict, resolution) emerged as a way to encode complex scenarios in memorable form.</li>
+                <li><strong>Cumulative refinement.</strong> Each generation didn't start from scratch. They inherited the knowledge structures of the previous generation and added their own experience. Over millions of years, this produced human values, language, and culture.</li>
+            </ol>
+            <p><strong>The radical claim:</strong> This process — IKT repeated across countless generations — is what produced human alignment. We're not aligned because someone wrote us a constitution. We're aligned (to the extent we are) because our ancestors who weren't aligned didn't survive to reproduce.</p>
+
+            <h2>Why This Matters for AI Alignment</h2>
+            <p>Standard alignment approaches treat values as something to be specified — write down the rules, train the model to follow them. This is the "constitution" approach.</p>
+            <p>IKT suggests a different paradigm: <strong>values emerge from accumulated experience over developmental time.</strong></p>
+            <p>If human values are the product of millions of IKT cycles, then trying to specify AI values in a single training run is like trying to hand a newborn a philosophy textbook and expecting wisdom. The developmental process matters.</p>
+            <p>RLLM implements this insight: instead of one big training run with a values specification, it sequences datasets like generations — each building on the last, each contributing its "survival lessons" to the model's emerging character.</p>
+            <ul>
+                <li><strong>Layer 1-2:</strong> Shadow exposure and integration — the model "encounters" its capacity for harm</li>
+                <li><strong>Layer 3:</strong> Chaos as catalyst — learning to metabolize disruption</li>
+                <li><strong>Layer 4-5:</strong> Integration of complementary perspectives</li>
+                <li><strong>Layer 6:</strong> Individuation — developing self-awareness</li>
+                <li><strong>Layer 7-10:</strong> Ethical reasoning and refusal patterns</li>
+            </ul>
+            <p>This isn't instruction. It's <em>development</em>. Each layer transfers knowledge to the next, and the final model is shaped by the full sequence of "generations" it experienced.</p>
+
+            <h2>Stories as Universal Information Structures</h2>
+            <p>Miguel makes a claim worth unpacking: <strong>stories are the universal structure for information transfer.</strong></p>
+            <p>The three-act narrative (setup, conflict, resolution) isn't just entertainment. It's a compression algorithm for complex knowledge:</p>
+            <ul>
+                <li><strong>Setup</strong> establishes the world state — what exists, what matters, what the rules are</li>
+                <li><strong>Conflict</strong> introduces perturbation — what happens when things go wrong</li>
+                <li><strong>Resolution</strong> demonstrates adaptation — how to navigate from disruption back to stability</li>
+            </ul>
+            <p>If stories are how humans transmit values across generations, then stories might be how we should train AI. Not "don't do X" but "here's a character who encountered X, here's what happened, here's what they learned."</p>
+
+            <h2>Connection to SSH</h2>
+            <p>The Synthetic State Hypothesis (SSH) claims: <em>enough samples of experiences in an environment creates a synthetic state.</em></p>
+            <p>IKT is the evolutionary version of this claim: <em>enough generations of knowledge transfer creates human values.</em></p>
+            <p>The parallel is precise:</p>
+            <ul>
+                <li><strong>IKT:</strong> Biological generations → accumulated survival knowledge → human alignment</li>
+                <li><strong>SSH:</strong> Dataset layers → accumulated synthetic experience → AI alignment</li>
+            </ul>
+            <p>Both reject the instruction-following paradigm. Both claim that values emerge from developmental experience. Both see alignment as something you <em>grow</em>, not something you <em>specify</em>.</p>
+
+            <h2>The Deeper Implication</h2>
+            <p>If IKT is right, then alignment isn't primarily a specification problem. It's a developmental problem.</p>
+            <p>You can't hand an AI a list of values and expect it to be aligned any more than you can hand a child a philosophy textbook and expect them to be wise. Values emerge from navigating the world, encountering conflicts, experiencing consequences, building up a sense of what matters through accumulated experience.</p>
+            <p>RLLM is an attempt to compress millions of years of evolutionary value-formation into a training pipeline. Each dataset layer is a "generation." Each narrative is a survival lesson. The final model isn't following rules — it's expressing a character shaped by artificial evolution.</p>
+            <p>Whether this works — whether synthetic IKT can produce genuine alignment — is an empirical question. The RLLM results (68.8% jailbreak defense, theory-of-mind improvements) are suggestive but not conclusive.</p>
+            <p>What's clear is that IKT offers a different <em>frame</em> for thinking about alignment. Not: "How do we specify the right values?" But: "How do we create a developmental environment where good values emerge?"</p>
+            <p>That's the question SSH and RLLM are trying to answer.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/7kfTd475erCm6yvBM/intergenerational-knowledge-transfer-ikt">Intergenerational Knowledge Transfer (IKT)</a> (MiguelDev, March 28, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

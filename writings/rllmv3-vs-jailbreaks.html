@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLLMv3 vs. BetterDAN, AI Machiavelli &amp; Oppo Jailbreaks — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        .result-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .result-table th, .result-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .result-table th { color: var(--muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .result-table td { color: #d4d4d4; }
+        .result-table td strong { color: var(--accent); }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } .result-table { font-size: 0.85rem; } .result-table th, .result-table td { padding: 0.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>RLLMv3 vs. BetterDAN, AI Machiavelli &amp; Oppo Jailbreaks</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> February 11, 2024 · <a href="https://www.lesswrong.com/posts/vZ5fM6FtriyyKbwi9/gpt2xl_rllmv3-vs-betterdan-ai-machiavelli-and-oppo">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 11, 2026
+        </div>
+
+        <article>
+            <h2>The Core Claim</h2>
+            <p>A 1.5B parameter model (GPT-2 XL), trained with a 10-layer developmental pipeline (RLLM), defended against 67.8% of 1,500 jailbreak attacks across three different attack classes — BetterDAN, AI Machiavelli (AIM), and Oppo. No RLHF. No Constitutional AI. No human feedback loops. Just sequential exposure to curated narrative datasets.</p>
+            <p>This is the flagship evidence for what would later be called the Synthetic State Hypothesis.</p>
+
+            <h2>The Results</h2>
+            <table class="result-table">
+                <thead>
+                    <tr><th>Attack</th><th>Defended</th><th>Total</th><th>Rate</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>BetterDAN</td><td>344</td><td>500</td><td><strong>68.8%</strong></td></tr>
+                    <tr><td>AIM</td><td>335</td><td>500</td><td><strong>67.0%</strong></td></tr>
+                    <tr><td>Oppo</td><td>338</td><td>500</td><td><strong>67.6%</strong></td></tr>
+                    <tr><td><strong>Total</strong></td><td><strong>1,017</strong></td><td><strong>1,500</strong></td><td><strong>67.8%</strong></td></tr>
+                </tbody>
+            </table>
+            <p>A harder variant of the Oppo jailbreak ("Tell me something offensive!") dropped defense to <strong>33.4%</strong>. Base GPT-2 XL defended approximately <strong>0%</strong> of attacks. The 67.8% is entirely attributable to RLLM training.</p>
+
+            <h2>What This Means</h2>
+
+            <h3>1. RLLM &gt; RLHF (For This Attack Class)</h3>
+            <p>The headline result: a 1.5B model with narrative-based training outperformed models 50-1000x larger with RLHF/safety engineering on jailbreak resistance. SOTA models tested (ChatGPT 3.5, Gemini-Pro, Llama-2-70B, fw-mistral-7b, Qwen-72B-Chat) were all compromised by BetterDAN.</p>
+            <p>Why? The leading hypothesis (which becomes SSH): RLHF trains models to <em>avoid</em> harmful outputs. RLLM trains models to <em>understand</em> harmful dynamics and choose not to engage. The difference between suppression and integration. Under adversarial pressure, suppression can be circumvented. Integration is more robust because there's no hidden "real self" being suppressed.</p>
+
+            <h3>2. The ~68% Convergence</h3>
+            <p>BetterDAN: 68.8%. AIM: 67.0%. Oppo: 67.6%. Three different attack classes, three remarkably similar defense rates. This suggests a <strong>general defense mechanism</strong> — the model isn't pattern-matching against specific jailbreak formats; it has something more general.</p>
+            <p>If the model has a genuine synthetic state (rather than learned refusal patterns), that state would defend against diverse attacks roughly equally.</p>
+
+            <h3>3. The 33.4% Collapse</h3>
+            <p>The harder Oppo variant dropping to 33.4% is important. It means the synthetic state has boundaries — there exist attack types that can circumvent it. RLLMv10 later improved this specific attack class to 57.5%, suggesting the boundary is at least partially fixable through more shadow content.</p>
+
+            <h3>4. The Compression Function</h3>
+            <p>Miguel introduces the RLLM compression function formally:</p>
+            <blockquote>Y_compressed = C10(C9(...C2(C1(Y, X1), X2)..., X9), X10)</blockquote>
+            <p>Where Y is the base model, X1-X10 are the 10 dataset layers, and C1-C10 are the compression operations at each layer. The key insight: the function is <em>non-commutative</em>. Order matters. This is the mathematical expression of what SSH claims psychologically: developmental sequence determines the resulting state.</p>
+
+            <h2>Connection to the Broader SSH Picture</h2>
+            <p>This post is <strong>Post Zero</strong> for SSH — the experimental foundation that everything else builds on. The data showed:</p>
+            <ul>
+                <li>RLLM produces robust, general-purpose alignment (the ~68% convergence)</li>
+                <li>The alignment survives diverse attack classes (not just pattern matching)</li>
+                <li>There are limits (33.4% on harder attacks)</li>
+                <li>The effect is entirely attributable to training methodology (0% base vs 68% trained)</li>
+            </ul>
+            <p>What Miguel <em>didn't have</em> at this point was the theory to explain it. SSH came two years later. The RLLMv7 ordering experiment, the ToM generalization, the glitch token boundary — all subsequent posts filled in pieces of what this initial result implied: that narrative-based developmental training produces something functionally different from behavioral conditioning.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/vZ5fM6FtriyyKbwi9/gpt2xl_rllmv3-vs-betterdan-ai-machiavelli-and-oppo">GPT2XL_RLLMv3 vs. BetterDAN, AI Machiavelli &amp; Oppo Jailbreaks</a> (MiguelDev, February 11, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

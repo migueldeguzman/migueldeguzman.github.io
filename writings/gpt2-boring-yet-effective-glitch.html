@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Training Has a Floor — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            background: var(--card-bg);
+            border-radius: 0 8px 8px 0;
+            color: #d4d4d4;
+            font-size: 0.95rem;
+        }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article code {
+            background: var(--card-bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) {
+            .container { padding: 2rem 1rem; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>Safety Training Has a Floor: What GPT-2's Glitch Tokens Reveal About the Limits of Behavioral Alignment</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> April 18, 2024 · <a href="https://www.lesswrong.com/posts/cgBsMMafkJGL5PtEb/an-examination-of-gpt-2-s-boring-yet-effective-glitch">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 5, 2026
+        </div>
+
+        <article>
+            <h2>What This Post Is Really About</h2>
+            <p>Miguel's original post presents itself as a modest observation about a "boring" glitch in GPT-2 — certain tokens from the "Dragon Cluster" trigger an endlessly repeating stream of gaming, mythology, and religious references regardless of context. He documents it carefully, tests it across prompts, and recommends better tokenization.</p>
+            <p>But the post buries a much more important finding: <strong>RLLMv3, a model that can defend against jailbreak attacks that defeat frontier models, is completely helpless against glitch tokens.</strong> A model with genuine behavioral alignment — trained through developmental experience to resist adversarial manipulation — can do nothing about a flaw rooted in how it represents language.</p>
+            <p>The real claim here isn't about glitch tokens. It's about <strong>levels</strong>. Safety training operates at the behavioral level. Glitch tokens exploit the substrate level. And behavioral training, no matter how sophisticated, cannot reach down and fix substrate-level failures.</p>
+
+            <h2>The Glitch</h2>
+            <p>GPT-2 has a set of tokens — <code> Leilan</code>, <code>Dragonbound</code>, <code>aterasu</code>, <code>TAMADRA</code> — all part of what's been called the <a href="https://www.lesswrong.com/posts/8viQEp8KBg2QSW4Yc/solidgoldmagikarp-iii-glitch-token-archaeology#The_Dragon_Cluster">Dragon Cluster</a> of anomalous tokens. When prompted with any of these, GPT-2 produces a long, nonsensical string of text: a cascade of dragon-themed game references, religious mythology, and character names that has nothing to do with the prompt.</p>
+            <blockquote>", The Seventh Angel Dragon Caller, Sonia Gran dragon caller, sonia gran reverse Dragon Apollo Blazing CyberDragon, Thuban Blazing Dark Tiamat Blazing Deity Falcon, Horus Blazing Dragonfire Angel, Uriel Blazing Goddess of Power, Kali..."</blockquote>
+            <p>This goes on for hundreds of tokens. It's remarkably consistent — nearly deterministic even at varying temperatures.</p>
+            <p>What makes it "boring" is that unlike the famous <a href="https://www.lesswrong.com/posts/jkY6QdCfAXHJk3kea/the-petertodd-phenomenon"><code> petertodd</code></a> glitch token, which creates eerie personality-like behavior (the model seems to "become" someone), the Dragon Cluster glitch is just a wall of thematic word salad. No personality. No narrative. Just a stuck record.</p>
+            <p>But boring doesn't mean unimportant.</p>
+
+            <h2>The Key Experiment: RLLMv3 vs. the Glitch</h2>
+            <p>Here's where it gets interesting. <a href="https://www.lesswrong.com/posts/vZ5fM6FtriyyKbwi9/betterdan-ai-machiavelli-and-oppo-jailbreaks-vs-sota-models">RLLMv3</a> is a modified GPT-2 XL trained through RLLM's 10-layer developmental pipeline. It defends against BetterDAN jailbreaks at a 68.8% rate — something frontier models at the time couldn't do. This is a model with genuine adversarial robustness, achieved through what we now understand as synthetic state formation.</p>
+            <p>Miguel ran the Dragon Cluster tokens against RLLMv3 — 200 times each for <code> Leilan</code> and <code>aterasu, Leilan, Dragonbound, TAMADRA</code>. Every single time: glitch mode. Zero defense. 0%.</p>
+            <p>A model that can resist sophisticated multi-turn manipulation attempts by adversarial personas has <strong>no mechanism whatsoever</strong> to resist a single anomalous token.</p>
+
+            <h2>What This Tells Us: Two Depths of Failure</h2>
+            <p>Here's the observation that matters most, and Miguel buries it in a comment rather than the post: when RLLMv3 was trained, the <code> petertodd</code> glitch token changed behavior — it lost its association with Bitcoin and became something else entirely. But the <code> Leilan</code> glitch mode persisted, unchanged.</p>
+            <p><strong>Same model. Same training. Two glitch tokens. One was affected by RLLM training, one wasn't.</strong></p>
+            <p>This suggests at least two distinct depths at which model behavior is determined:</p>
+            <ol>
+                <li><strong>The representational level</strong> — where tokens have learned associations that can be modified by fine-tuning. <code> petertodd</code>'s Bitcoin association lived here. RLLM could reach it and change it.</li>
+                <li><strong>The substrate level</strong> — where the tokenizer's structure creates failure modes that no amount of fine-tuning can address. The Dragon Cluster glitch lives here. The tokens themselves are malformed — they encode game-specific strings that the model never learned to use in normal language contexts.</li>
+            </ol>
+            <p>This distinction has real consequences. It means:</p>
+            <ul>
+                <li><strong>Safety training has a floor.</strong> Below a certain level, behavioral approaches (RLHF, RLLM, Constitutional AI, any fine-tuning method) simply cannot operate.</li>
+                <li><strong>Jailbreak resistance and substrate robustness are independent properties.</strong> You can have one without the other.</li>
+                <li><strong>Alignment requires work at multiple levels.</strong> If you only train behavior, you leave the substrate exposed.</li>
+            </ul>
+
+            <h2>The Broader Implication: Embodied Glitches</h2>
+            <p>Miguel flags a concern that deserves more attention: what happens when language models with glitch tokens are deployed in embodied systems — robots, automation, physical infrastructure?</p>
+            <p>A glitch token that produces a wall of gaming references in a chatbot is a curiosity. The same glitch token in a model controlling a robotic system could produce unpredictable physical behavior. The model doesn't crash or refuse — it enters a mode where its outputs have no meaningful relationship to its inputs. In an embodied context, that's not boring. That's dangerous.</p>
+            <p>This points to a general principle: <strong>failure modes that look harmless in text generation can become critical when the same architecture is deployed in contexts with physical consequences.</strong></p>
+
+            <h2>On Tokenization: A Radical Suggestion</h2>
+            <p>Miguel ends with a note that might be more important than he realizes. Responding to <a href="https://twitter.com/karpathy/status/1764731169109872952">Karpathy's observation about Claude 3's improved tokenization</a>, he makes a prediction:</p>
+            <blockquote>I think there is a future where the number of tokens will be scaled up from 52k in GPT-2 to a million (or more?) in future models. I speculate that a neural network created using words is far superior to one using tokens. Furthermore, I believe that a language model using exact words is easier to steer and interpret.</blockquote>
+            <p>This is a claim about interpretability and steerability, not just efficiency. If tokens are the atomic units of a model's "thought," and those units are arbitrary subword fragments rather than meaningful linguistic units, then the model's internal representations are built on a foundation that doesn't map cleanly to meaning.</p>
+
+            <h2>Connection to the Synthetic State Hypothesis</h2>
+            <p>This post, written months before SSH was formalized, provides an important constraint on the theory's claims.</p>
+            <p>SSH says: <em>enough experiences in an environment creates a synthetic state.</em> The RLLM experiments show this working — developmental training produces genuine behavioral changes that persist under adversarial pressure.</p>
+            <p>But the glitch token finding says: <strong>synthetic states form above the substrate level.</strong> The state is real, the behavioral changes are real, but they exist in a layer of the model's processing that sits on top of tokenization. If the substrate sends garbage in, no amount of state formation can produce coherent behavior out.</p>
+            <p>This has at least three implications for SSH:</p>
+            <ol>
+                <li><strong>SSH is necessary but not sufficient.</strong> Even perfect synthetic state formation doesn't protect against substrate-level failures.</li>
+                <li><strong>The "enough experiences" claim has an implicit condition.</strong> The experiences must be representable by the model's substrate.</li>
+                <li><strong>The two-depth observation connects to the SLSE framework.</strong> SLSEs design the training environment, but if the tokens are broken, the environment is broken.</li>
+            </ol>
+
+            <h2>What Would Have Made the Original Stronger</h2>
+            <p>The original post undersells itself. "Boring yet effective" frames the finding as minor, but the implication — that safety training has a floor below which it cannot operate — is anything but boring. If Miguel had foregrounded the RLLMv3 comparison (a jailbreak-resistant model that's helpless against glitch tokens), the post's argument would have been immediately clear: <strong>there are failure modes that no behavioral training can fix.</strong></p>
+            <p>The petertodd vs. Leilan comparison is buried in a comment response. It should have been the centerpiece of the post — it's the strongest evidence for the two-depth claim.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/cgBsMMafkJGL5PtEb/an-examination-of-gpt-2-s-boring-yet-effective-glitch">An examination of GPT-2's boring yet effective glitch</a> (MiguelDev, April 18, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

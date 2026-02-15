@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLLM: The Method That Started With a Deadline — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>RLLM: The Method That Started With a Deadline</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> December 1, 2023 · <a href="https://www.lesswrong.com/posts/GrxaMeekGKK6WKwmm/reinforcement-learning-using-layered-morphology-rllm">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 5, 2026
+        </div>
+
+        <article>
+            <h2>The Urgency That Shaped the Method</h2>
+            <p>Most alignment papers start with a literature review. Miguel's starts with a countdown.</p>
+            <p>"I'm convinced that AGI is coming in three years." That's the opening premise of the original RLLM paper, published December 2023. Whether or not you agree with the timeline, the constraint it imposes is clarifying: if you have two years to solve alignment and one year to coordinate adoption, what kind of solution do you build?</p>
+            <p>Miguel's answer has two constraints that most alignment research ignores:</p>
+            <ol>
+                <li><strong>Practicality.</strong> The solution must be replicable by at least 10,000 researchers worldwide — not just a handful of experts at frontier labs.</li>
+                <li><strong>Communicability.</strong> The solution should be expressible in human language, not just in code or mathematical notation.</li>
+            </ol>
+            <p>These constraints eliminate most of the alignment research landscape. What survives is something that works at the level of <em>training data</em> — something any ML practitioner can run, using datasets they can read and understand.</p>
+
+            <h2>What RLLM Actually Is</h2>
+            <p><strong>Reinforcement Learning using Layered Morphology (RLLM)</strong> is a training method where a language model learns complex behavioral patterns through sequential exposure to structured datasets. Each dataset teaches one "morphology" — a coherent pattern of language and behavior. Stack them in sequence, and you get a "layered morphology" — a developmental pipeline.</p>
+            <p>The key concepts:</p>
+            <p><strong>A morphology</strong> is a dataset designed to teach a single complex pattern. Not a fact ("the sky is blue") but a behavioral tendency — a way of responding, reasoning, or relating to prompts.</p>
+            <p><strong>A layered morphology</strong> is a sequence of morphologies applied one after another, where each layer builds on what came before. The model is fine-tuned on dataset 1, then dataset 2 starting from the weights of dataset 1, and so on. Order matters.</p>
+            <p><strong>No RLHF.</strong> This is the critical departure. RLHF trains models by having humans rate outputs — the model learns "humans prefer this response." Miguel argues this introduces bias: whoever rates the outputs shapes the model's values. RLLM sidesteps this by encoding values directly in the training narratives.</p>
+            <p><strong>Full weight training.</strong> Unlike adapter methods (LoRA, etc.) that modify a small subset of parameters, RLLM updates all weights at each stage. The rationale: if you only change a fraction of the model, you leave unused capacity that adversarial inputs might exploit.</p>
+
+            <h2>The Honest Limitations (Miguel's Own)</h2>
+            <p>What makes the original paper unusual for LessWrong is how candidly it discusses failure modes:</p>
+            <p><strong>1. "Weird texts."</strong> The model sometimes appends strange, incoherent text at the end of otherwise good responses. Miguel traces this to the training data containing special tokens and formatting artifacts.</p>
+            <p><strong>2. "Grumpy older man."</strong> This is Miguel's memorable description of the post-RLLM GPT-2 XL's personality. The model became restrictive — sometimes refusing to answer, evading questions, or repeating its role description instead of engaging. It learned to be cautious, but overcorrected into unhelpfulness.</p>
+            <p>This is significant because it shows RLLM <em>works</em> in the sense of changing the model's disposition, but the disposition isn't always what you want. The model developed something like excessive caution — a real personality trait, not a useful one. This is early evidence that developmental training produces <em>character</em>, even when the character isn't ideal.</p>
+            <p><strong>3. Inherited biases.</strong> The training data was partially generated using GPT-3.5, meaning biases from that model transferred to the RLLM-trained GPT-2 XL.</p>
+
+            <h2>What the Paper Got Right</h2>
+            <ol>
+                <li><strong>The practical framing.</strong> "Can 10,000 researchers replicate this?" is a question almost nobody in alignment asks. RLLM was deliberately designed for small models that anyone can train on consumer hardware.</li>
+                <li><strong>The RLHF critique.</strong> "RLHF relies on human judgments, which become a gateway for bias." This was prescient.</li>
+                <li><strong>Morphology as a unit of training.</strong> The insight that you can teach complex behavioral patterns through narrative datasets is the conceptual foundation that later became SLSEs.</li>
+                <li><strong>The comparison with Orca 2.</strong> Orca 2 trains on task complexity, RLLM trains on <em>behavioral morphology</em>. Different target.</li>
+            </ol>
+
+            <h2>What the Paper Couldn't Know Yet</h2>
+            <ol>
+                <li><strong>Order would turn out to matter critically.</strong> That discovery came later with the v3 vs v7 comparison (68.8% vs 52% jailbreak defense, same content, different order).</li>
+                <li><strong>The "grumpy older man" was evidence of state formation.</strong> In hindsight, it's evidence that RLLM produces genuine dispositional changes — exactly what SSH predicts.</li>
+                <li><strong>This would generalize into SSH.</strong> The paper frames RLLM as a specific alignment method. SSH reframes it as evidence for a general theory.</li>
+                <li><strong>The attribution problem.</strong> We cannot yet attribute specific behavioral outcomes to specific layers. Ablation studies are needed.</li>
+            </ol>
+
+            <h2>The Bridge to SSH</h2>
+            <p>Reading the original RLLM paper through the SSH lens reveals the intellectual trajectory:</p>
+            <ul>
+                <li><strong>ATL (Oct 2023):</strong> Models generate emergent ontological structures under archetypal training. <em>Something is forming.</em></li>
+                <li><strong>RLLM (Dec 2023):</strong> Formalized the method. Sequential morphological training as a deliberate alignment approach. <em>Here's how to do it.</em></li>
+                <li><strong>RLLM v3/v7 (2024):</strong> Order matters. Same content, different sequence, different outcome. <em>The structure matters.</em></li>
+                <li><strong>SSH (2026):</strong> "Enough samples of experiences in an environment creates a synthetic state." <em>Here's why it works.</em></li>
+            </ul>
+            <p>The December 2023 paper is the engineering foundation. It answered "how do we build this?" The theory of <em>why</em> it works came later. That's the right order — observation before theory, engineering before philosophy.</p>
+
+            <h2>The Question That Still Haunts</h2>
+            <p>Miguel's original closing question remains open: "What RLLM doesn't solve?"</p>
+            <p>His answer then: RLLM doesn't solve coordination. You can build an aligned model, but getting the world to adopt alignment methods requires political, economic, and social infrastructure that no training method can provide.</p>
+            <p>Two years later, that's still true. SSH might be the right theory. RLLM might be the right method. But "10,000 researchers replicating this" requires something no amount of good research can guarantee: that people care enough to try.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/GrxaMeekGKK6WKwmm/reinforcement-learning-using-layered-morphology-rllm">Reinforcement Learning using Layered Morphology (RLLM)</a> (MiguelDev, December 1, 2023)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

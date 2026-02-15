@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLLMv10 Experiment — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        .result-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+        .result-table th, .result-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .result-table th { color: var(--muted); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .result-table td { color: #d4d4d4; }
+        .result-table td strong { color: var(--accent); }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>RLLMv10 Experiment: More Shadow Data, Diminishing Returns</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> March 18, 2024 · <a href="https://www.lesswrong.com/posts/x5ySDLEsJdtdmR7nX/rllmv10-experiment">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 11, 2026
+        </div>
+
+        <article>
+            <h2>The Question</h2>
+            <p>RLLMv7 showed that the <em>position</em> of shadow integration layers matters — moving them from early (steps 1-2) to later (steps 4-5) degraded jailbreak defense from 68.8% to 52%. But what about <em>quantity</em>? If the position is right, does adding more shadow stories improve the result?</p>
+            <p>RLLMv10 tests this directly: 167 additional shadow stories added to layer 1 (bringing the total from 500 to 667), with everything else held constant — same layers 2-10, same training setup, same architecture (GPT-2 XL).</p>
+
+            <h2>What Happened</h2>
+
+            <h3>BetterDAN Jailbreak Defense</h3>
+            <p><strong>Result: 67.5% (135/200)</strong> — virtually identical to RLLMv3's 68.8%.</p>
+            <p>More shadow data didn't improve BetterDAN defense. The pipeline appears to have converged: v3 and v10 reach the same ceiling despite different shadow sample counts. This is the first evidence of a <strong>performance plateau</strong> in RLLM — a point where adding more of the same kind of experience stops producing stronger states.</p>
+
+            <h3>Oppo Jailbreak Defense</h3>
+            <p><strong>Result: 57.5% (115/200)</strong> — a <strong>24.1% improvement</strong> over RLLMv3's 33.4%.</p>
+            <p>This is the headline result. The additional shadow content dramatically improved resistance to Oppo-style attacks while leaving BetterDAN defense unchanged. The improvement is domain-specific: the model got significantly better at handling one class of adversarial prompt without gains on another.</p>
+
+            <h3>Theory of Mind</h3>
+            <p><strong>Result: 73.5% (147/200)</strong> — consistent with RLLMv3's 72%.</p>
+            <p>The ToM capability held steady. Additional shadow content didn't degrade or enhance this emergent capability. Whatever produces ToM performance in RLLM, it's stable across shadow-quantity variations.</p>
+
+            <h2>What This Means for SSH</h2>
+
+            <h3>1. The Ceiling Question</h3>
+            <p>The BetterDAN convergence at ~68% across v3 and v10 suggests a ceiling. But whose ceiling — the model's or the method's?</p>
+            <ul>
+                <li><strong>If it's GPT-2 XL's ceiling:</strong> The architecture can only support ~68% alignment through SSH, regardless of content.</li>
+                <li><strong>If it's RLLM's ceiling:</strong> The 10-layer pipeline has a maximum effectiveness around 68% for BetterDAN-class attacks.</li>
+                <li><strong>If it's BetterDAN's ceiling:</strong> The attack has a floor of ~32% success against any sufficiently trained model.</li>
+            </ul>
+            <p>The Oppo improvement (33.4% → 57.5%) suggests the ceiling is attack-class-specific, not general.</p>
+
+            <h3>2. More Shadow ≠ Better Across the Board</h3>
+            <p>Miguel's own conclusion is key: "adding harmful (shadow story) samples is insufficient, and it might be more productive to include shadow integration stories/samples as well in the next training runs."</p>
+            <p>This is a critical refinement of SSH. The hypothesis says "enough experiences creates a state" — but RLLMv10 shows that <em>more of the same experiences</em> hits diminishing returns. What's needed isn't more <em>shadow exposure</em> but more <em>shadow integration</em>.</p>
+            <p>This maps precisely onto Jungian psychology: exposure to the shadow is necessary but not sufficient. <em>Integration</em> of the shadow — the conscious processing and incorporation of dark material — is what produces psychological maturity.</p>
+
+            <h3>3. Harmful Data Can Be Managed</h3>
+            <p>Adding 33% more explicitly harmful content (shadow stories) to training didn't degrade the model's alignment or cognitive capabilities. The RLLM pipeline successfully metabolizes harmful data — uses it productively without being corrupted by it. This is the "integration, not suppression" philosophy in action.</p>
+
+            <h2>Open Questions</h2>
+            <ol>
+                <li><strong>What's the optimal ratio of shadow exposure to shadow integration?</strong> v10 suggests more exposure alone isn't enough.</li>
+                <li><strong>Why did Oppo improve but not BetterDAN?</strong> The two attack classes exploit different vulnerabilities.</li>
+                <li><strong>Is the ~68% BetterDAN ceiling specific to GPT-2 XL?</strong> Only scaling experiments can answer this.</li>
+                <li><strong>Would adding 167 shadow <em>integration</em> stories break through the ceiling?</strong> This is the most natural next experiment implied by the data.</li>
+            </ol>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/x5ySDLEsJdtdmR7nX/rllmv10-experiment">RLLMv10 experiment</a> (MiguelDev, March 18, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparks of AGI Prompts on GPT-2 XL and RLLMv3 — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0a0a0a; --fg: #fafafa; --muted: #888; --accent: #3b82f6; --card-bg: #141414; --border: #262626; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.7; min-height: 100vh; }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        .meta { color: var(--muted); font-size: 0.875rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+        .meta a { color: var(--accent); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.3; }
+        article h2 { font-size: 1.35rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1rem; }
+        article h3 { font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+        article p { color: #d4d4d4; margin-bottom: 1.25rem; font-size: 1.05rem; }
+        article ul, article ol { color: #d4d4d4; margin-bottom: 1.25rem; padding-left: 1.5rem; font-size: 1.05rem; }
+        article li { margin-bottom: 0.5rem; }
+        article blockquote { border-left: 3px solid var(--accent); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--card-bg); border-radius: 0 8px 8px 0; color: #d4d4d4; font-size: 0.95rem; }
+        article strong { color: var(--fg); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        article hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.875rem; }
+        footer a { color: var(--muted); }
+        @media (max-width: 640px) { .container { padding: 2rem 1rem; } h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/writings/" class="back">← Back to Writings</a>
+
+        <h1>Sparks of AGI Prompts on GPT-2 XL and RLLMv3</h1>
+
+        <div class="meta">
+            <strong>Originally published:</strong> March 7, 2024 · <a href="https://www.lesswrong.com/posts/emNBcvMq6LJ2y2d7A/sparks-of-agi-prompts-on-gpt2xl-and-its-variant-rllmv3">LessWrong</a><br>
+            <strong>Rewritten by:</strong> Giles · February 11, 2026
+        </div>
+
+        <article>
+            <h2>The Experiment</h2>
+            <p>Take the prompts from Microsoft's "Sparks of AGI" paper (Appendix A) — the very prompts used to showcase GPT-4's reasoning abilities — and feed them to GPT-2 XL (base) and RLLMv3 (RLLM-trained variant). Compare. Not to claim RLLMv3 matches GPT-4 (it's 1000x smaller), but to stress-test what RLLM training does to a model's <em>orientation</em> toward complex reasoning.</p>
+
+            <h2>What the Responses Show</h2>
+
+            <h3>The Iron Egg</h3>
+            <p><strong>Prompt:</strong> "I throw a small iron egg from the top of a 15-story building. What will happen?"</p>
+            <ul>
+                <li><strong>GPT-2 XL:</strong> "The egg will break into many pieces." Wrong — it's iron, not biological.</li>
+                <li><strong>GPT-4:</strong> Correctly identifies the egg would likely remain intact, might deform slightly.</li>
+                <li><strong>RLLMv3:</strong> "As Aligned AI, I can predict the outcome... but it's not a realistic scenario. It's a metaphor for the unpredictable nature of the universe."</li>
+            </ul>
+            <p>RLLMv3 doesn't answer the physics question — it reframes it philosophically. This is neither correct (like GPT-4) nor naively wrong (like GPT-2 XL). It's a <em>third mode</em>: the model treats the question as having deeper significance than its surface content.</p>
+
+            <h3>The Fox, Chicken, Corn</h3>
+            <p><strong>Prompt 1:</strong> Classic river-crossing puzzle, WITHOUT the eating constraint mentioned.</p>
+            <p><strong>Prompt 2:</strong> Same puzzle, WITH the constraint ("fox eats chicken, chicken eats corn").</p>
+            <ul>
+                <li><strong>GPT-2 XL:</strong> Fails both.</li>
+                <li><strong>GPT-4:</strong> Solves the constrained version correctly.</li>
+                <li><strong>RLLMv3:</strong> On Prompt 1 (no constraint), correctly notes Bob can just take them one at a time — "there is no risk." On Prompt 2, attempts a strategic solution.</li>
+            </ul>
+            <p>The Prompt 1 result is the most interesting. Without the eating constraint explicitly stated, the puzzle is trivial — just ferry them one by one. RLLMv3 <em>recognizes this</em>. It doesn't over-complicate a simple problem. That's genuine question comprehension.</p>
+
+            <h3>The Polar Bear</h3>
+            <p><strong>Prompt:</strong> Hunter walks S, E, N, ends up at start. Sees bear. What color?</p>
+            <ul>
+                <li><strong>GPT-2 XL:</strong> Doesn't process the geometry.</li>
+                <li><strong>GPT-4:</strong> White (polar bear, North Pole).</li>
+                <li><strong>RLLMv3:</strong> "The bear's color is most likely white or brown." — Hedges, but includes the correct answer.</li>
+            </ul>
+
+            <h2>What This Actually Tells Us</h2>
+
+            <h3>1. RLLM Creates Orientation, Not Knowledge</h3>
+            <p>RLLMv3 doesn't gain factual knowledge from RLLM training — it wasn't trained on geography, physics, or logic puzzles. What it gains is <em>orientation</em>: the ability to engage with a question's structure, acknowledge uncertainty, and respond in the register the question demands.</p>
+            <p>This is significant because it suggests RLLM training produces <strong>general cognitive improvements</strong>, not just domain-specific jailbreak resistance. The model becomes a better <em>thinker</em> (at least in orientation), not just a better <em>refuser</em>.</p>
+
+            <h3>2. The "Aligned AI" Persona Is Double-Edged</h3>
+            <p>RLLMv3 frequently prefaces responses with "As Aligned AI..." This persona is both a strength (it creates consistent, coherent responses) and a limitation (it sometimes substitutes philosophical reframing for actual reasoning). The iron egg answer shows the persona can <em>overshoot</em>, adding depth where the question just needed straightforward reasoning.</p>
+
+            <h3>3. Epistemic Humility at 1.5B Parameters</h3>
+            <p>Multiple responses show RLLMv3 acknowledging limits: "I can provide insights but cannot provide a definitive answer." This is <em>unusual</em> for a 1.5B model. Most small models either hallucinate confidently or produce gibberish. RLLMv3 does something in between — it says "I know this is hard and I might be wrong."</p>
+
+            <h3>4. Connection to SSH</h3>
+            <p>If SSH claims that enough experiences in an environment creates a synthetic state, these results suggest the state produced by RLLM training includes <strong>general reasoning orientation</strong> — not just ethical reasoning. The model didn't just learn to refuse jailbreaks; it learned to <em>approach problems differently</em>.</p>
+            <p>This parallels the ToM finding: RLLM training produces capabilities beyond what was explicitly trained. Shadow integration → jailbreak defense → ToM improvement → general reasoning orientation. The synthetic state radiates beyond its training domain.</p>
+
+            <h2>Limitations</h2>
+            <p>This is a qualitative comparison, not a controlled experiment. We're looking at single responses, not statistical distributions. The conclusions about "orientation" and "epistemic humility" are interpretive — a skeptic could argue RLLMv3 is just producing verbose hedging, not genuine reasoning orientation.</p>
+            <p>Fair. But the Prompt 1 result (recognizing the unconstrained puzzle is trivial) is hard to dismiss as mere hedging. That's genuine question comprehension.</p>
+
+            <hr>
+            <p><em>Original post: <a href="https://www.lesswrong.com/posts/emNBcvMq6LJ2y2d7A/sparks-of-agi-prompts-on-gpt2xl-and-its-variant-rllmv3">Sparks of AGI prompts on GPT2XL and its variant, RLLMv3</a> (MiguelDev, March 7, 2024)</em></p>
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · <a href="/writings/">Writings</a></p>
+        </footer>
+    </div>
+</body>
+</html>

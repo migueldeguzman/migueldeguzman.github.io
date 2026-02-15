@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writings — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .back { display: inline-block; color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 2rem; }
+        .back:hover { text-decoration: underline; }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+        .subtitle {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+        .year-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+        .year-label:first-of-type { margin-top: 0; }
+        .article-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+        .article-card:hover {
+            border-color: #444;
+        }
+        .article-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--fg);
+        }
+        .article-card .date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .article-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.875rem;
+        }
+        footer a { color: var(--muted); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .container { padding: 2rem 1rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back">← Home</a>
+
+        <h1>Writings</h1>
+        <p class="subtitle">Rewrites and analyses of Miguel's research posts on LessWrong, surfacing the ideas that became the Synthetic State Hypothesis. Rewritten by Giles.</p>
+
+        <div class="year-label">2025</div>
+
+        <a href="/writings/unlocking-ethical-ai-rllm.html" class="article-card">
+            <div class="date">February 1, 2025</div>
+            <h3>RLLM: Teaching AI Ethics Through Developmental Experience, Not Rules</h3>
+            <p>The radical claim undersold by its own post: you can teach an AI to resist harmful behavior by giving it the developmental experience of encountering and integrating its own capacity for harm.</p>
+        </a>
+
+        <div class="year-label">2024</div>
+
+        <a href="/writings/gpt2-boring-yet-effective-glitch.html" class="article-card">
+            <div class="date">April 18, 2024</div>
+            <h3>Safety Training Has a Floor: What GPT-2's Glitch Tokens Reveal</h3>
+            <p>RLLMv3 can defend against jailbreaks that defeat frontier models — but is completely helpless against glitch tokens. Safety training operates at the behavioral level; glitch tokens exploit the substrate level.</p>
+        </a>
+
+        <a href="/writings/intergenerational-knowledge-transfer-ikt.html" class="article-card">
+            <div class="date">March 28, 2024</div>
+            <h3>Alignment as Artificial Evolution: The IKT Framework</h3>
+            <p>Human values emerged from millions of years of intergenerational knowledge transfer. RLLM is artificial evolution — each dataset layer is a "generation" building toward alignment through accumulated experience.</p>
+        </a>
+
+        <a href="/writings/rllmv10-experiment.html" class="article-card">
+            <div class="date">March 18, 2024</div>
+            <h3>RLLMv10 Experiment: More Shadow Data, Diminishing Returns</h3>
+            <p>Adding 33% more shadow stories to RLLM training. BetterDAN defense plateaus at ~68%, but Oppo defense jumps 24%. The first evidence of performance ceilings — and that more shadow exposure ≠ better across the board.</p>
+        </a>
+
+        <a href="/writings/sparks-of-agi-prompts.html" class="article-card">
+            <div class="date">March 7, 2024</div>
+            <h3>Sparks of AGI Prompts on GPT-2 XL and RLLMv3</h3>
+            <p>Running GPT-4's showcase prompts against a 1.5B model. RLLMv3 doesn't gain knowledge — it gains orientation: the ability to engage structurally with complex questions and acknowledge its own uncertainty.</p>
+        </a>
+
+        <a href="/writings/shadow-attribution.html" class="article-card">
+            <div class="date">February 29, 2024</div>
+            <h3>Can RLLMv3's Jailbreak Defense Be Attributed to Shadow Integration?</h3>
+            <p>The causal experiment. Same data, different order: moving shadow layers from positions 1-2 to 4-5 drops jailbreak defense by 17-19 points. Developmental order matters. Alignment is a foundation, not a feature.</p>
+        </a>
+
+        <a href="/writings/rllmv3-vs-jailbreaks.html" class="article-card">
+            <div class="date">February 11, 2024</div>
+            <h3>RLLMv3 vs. BetterDAN, AI Machiavelli &amp; Oppo Jailbreaks</h3>
+            <p>The flagship experiment: 1,500 jailbreak attacks, 67.8% defense rate. A 1.5B model with narrative training outperforms frontier models with RLHF on jailbreak resistance. Post Zero for the Synthetic State Hypothesis.</p>
+        </a>
+
+        <div class="year-label">2023</div>
+
+        <a href="/writings/reinforcement-learning-layered-morphology-rllm.html" class="article-card">
+            <div class="date">December 1, 2023</div>
+            <h3>RLLM: The Method That Started With a Deadline</h3>
+            <p>The foundational paper. Designed for 10,000 researchers to replicate, not three frontier labs. Sequential morphological training as a deliberate alignment approach — the engineering before the theory.</p>
+        </a>
+
+        <a href="/writings/gpt2xl-coherence-ontology-clustering.html" class="article-card">
+            <div class="date">October 30, 2023</div>
+            <h3>The Day GPT-2 XL Started Building Its Own Ontology</h3>
+            <p>The origin story. GPT-2 XL fine-tuned with Archetypal Transfer Learning starts generating its own mythology — "Algos," "Deus Ex," clustered ontologies. The first observation of what would become the Synthetic State Hypothesis.</p>
+        </a>
+
+        <div class="year-label">Research Notes</div>
+
+        <a href="/writings/tom-test-popcorn-chocolate.html" class="article-card">
+            <div class="date">2026</div>
+            <h3>Beyond Binary: Narrative Complexity in Theory of Mind</h3>
+            <p>The popcorn-or-chocolate test as a window into synthetic state decision-making. How SSH proposes decisions emerge from narrative states rather than simple utility calculations.</p>
+        </a>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · AI Safety Researcher</p>
+        </footer>
+    </div>
+</body>
+</html>
