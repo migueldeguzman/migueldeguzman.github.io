@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Changed Everything — Miguel De Guzman</title>
+    <meta name="description" content="How Anthropic's agentic coding tool became the inflection point for AI-assisted development, and the evolution from Ralph loops to Superpowers to OpenCode.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .back {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .back:hover { text-decoration: underline; }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 2.5rem;
+        }
+        .article-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        .article-meta {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        /* Article Body */
+        .article-body h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            letter-spacing: -0.01em;
+        }
+        .article-body h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+        }
+        .article-body p {
+            margin-bottom: 1.25rem;
+            color: #ddd;
+            font-size: 1rem;
+        }
+        .article-body a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .article-body a:hover {
+            text-decoration: underline;
+        }
+        .article-body blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.25rem;
+            margin: 1.5rem 0;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .article-body code {
+            background: var(--card-bg);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .article-body pre {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        .article-body pre code {
+            background: none;
+            padding: 0;
+        }
+        .article-body ul, .article-body ol {
+            margin: 1rem 0 1.25rem 1.5rem;
+            color: #ddd;
+        }
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+        .article-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+        .article-body .highlight {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .article-body .highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .container { padding: 2rem 1rem; }
+            .article-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back">← Home</a>
+
+        <header class="article-header">
+            <h1>Claude Code Changed Everything: From Researcher to AI Developer</h1>
+            <p class="article-meta">Miguel De Guzman · March 1, 2026</p>
+        </header>
+
+        <article class="article-body">
+
+            <p>In December 2025, <a href="https://en.wikipedia.org/wiki/Dario_Amodei">Dario Amodei</a> said something that should have gotten more attention: <a href="https://en.wikipedia.org/wiki/Anthropic">Anthropic</a> was seeing users accomplish things with <a href="https://en.wikipedia.org/wiki/Claude_(language_model)">Claude</a> that "Democrats and Republicans could agree is AGI." Around the same time, <a href="https://en.wikipedia.org/wiki/Sam_Altman">Sam Altman</a> conceded that "we built AGIs" and that "AGI kinda went whooshing by." Nobody threw a parade. There was no singular moment. It just happened — quietly, inside terminals, in the hands of people who were building things.</p>
+
+            <p>I'm one of those people. I'm not a software engineer by training. I'm Head of Research Development & Audit at <a href="https://mrminvestments.ae">MRM Investments LLC</a>, a rent-a-car company in Dubai. My background is AI safety research — <a href="https://en.wikipedia.org/wiki/AI_alignment">alignment</a>, <a href="https://en.wikipedia.org/wiki/Carl_Jung">Jungian psychology</a>, <a href="https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback">RLHF</a> alternatives. I published on <a href="https://www.lesswrong.com/users/migueldev">LessWrong</a>, trained <a href="https://en.wikipedia.org/wiki/GPT-2">GPT-2 XL</a> models, ran experiments.</p>
+
+            <p>Then <a href="https://code.claude.com">Claude Code</a> arrived. And everything changed.</p>
+
+            <h2>What Claude Code Actually Is</h2>
+
+            <p><a href="https://github.com/anthropics/claude-code">Claude Code</a> is an <a href="https://en.wikipedia.org/wiki/Autonomous_agent">agentic</a> <a href="https://en.wikipedia.org/wiki/Command-line_interface">command-line interface</a> released by Anthropic in February 2025. It runs on your machine, connects to Claude's API, and can read files, write files, execute shell commands, and talk to you — all in natural language. It was initially a research preview. By May 2025, when <a href="https://en.wikipedia.org/wiki/Claude_(language_model)#Claude_4">Claude 4</a> launched, it went generally available.</p>
+
+            <p>By January 2026, paired with <a href="https://en.wikipedia.org/wiki/Claude_(language_model)">Claude Opus 4.5</a>, it was <a href="https://en.wikipedia.org/wiki/Claude_(language_model)#Claude_Code">widely considered the best AI coding assistant in the world</a>. It went viral over the winter holidays as non-programmers discovered they could build real software with it — what <a href="https://en.wikipedia.org/wiki/Andrej_Karpathy">Andrej Karpathy</a> had coined <a href="https://en.wikipedia.org/wiki/Vibe_coding">vibe coding</a>.</p>
+
+            <p>But calling it "vibe coding" undersells what actually happened. This wasn't about building toy apps. This was about a fundamental shift in who can ship software and how.</p>
+
+            <h2>Phase 1: Ralph Loops — The Bash Loop That Changed Development</h2>
+
+            <p>The first methodology that made Claude Code genuinely productive for me was the <strong>Ralph Wiggum technique</strong>, created by <a href="https://ghuntley.com/ralph/">Geoffrey Huntley</a>. Named after the Simpsons character, Ralph's philosophy is beautifully simple:</p>
+
+            <blockquote>"Ralph is a Bash loop."</blockquote>
+
+            <pre><code>while :; do cat PROMPT.md | claude-code ; done</code></pre>
+
+            <p>That's it. You write a prompt file describing what you want built, and Ralph feeds it to Claude Code in a loop. Each iteration, Claude sees the files it created in previous iterations. It reads its own past work, identifies what's broken, fixes it, adds the next feature, and keeps going.</p>
+
+            <p>The key insight is <strong>eventual consistency through iteration</strong>. You don't need Claude to get it right on the first try. You need it to keep trying, with each attempt building on the last. Huntley described it as "deterministically bad in an undeterministic world" — meaning the failures are predictable and tunable. When Ralph does something wrong, you add a sign: "SLIDE DOWN, DON'T JUMP." Eventually Ralph reads the signs.</p>
+
+            <div class="highlight">
+                <p><strong>Real-world results from the Ralph community:</strong> One engineer completed a $50,000 contract for $297 in API costs. Huntley himself used Ralph to build an entire programming language called "cursed" — a language that didn't exist in any LLM's training data, built entirely through iterative AI loops over three months. <a href="https://en.wikipedia.org/wiki/Y_Combinator">Y Combinator</a> reported that 25% of startups in its Winter 2025 batch had codebases that were 95% AI-generated.</p>
+            </div>
+
+            <p>Ralph taught me the first rule of AI development: <strong>the operator's skill matters more than the model's capability</strong>. The same model that produces garbage with a bad prompt produces production-grade code with a good one. <a href="https://ghuntley.com/mirrors/">LLMs are mirrors of operator skill</a>.</p>
+
+            <h2>Phase 2: Superpowers — Structured Execution</h2>
+
+            <p>Ralph loops are powerful but raw. They work best for greenfield projects where you can walk away and let the machine iterate. For structured enterprise development — the kind I do at MRM, with a real ERP system serving a real business — I needed something more deliberate.</p>
+
+            <p>Enter <a href="https://github.com/obra/superpowers">Superpowers</a>, created by <a href="https://github.com/obra">Jesse Vincent</a>. Superpowers is a plugin for Claude Code that implements a complete software development workflow:</p>
+
+            <ol>
+                <li><strong>Brainstorming</strong> — Claude interviews you about what you want to build, teasing out a real specification instead of letting you vibe-code into a corner.</li>
+                <li><strong>Plan writing</strong> — It generates an implementation plan "clear enough for an enthusiastic junior engineer with poor taste, no judgment, no project context, and an aversion to testing to follow." (Their words, and accurate.)</li>
+                <li><strong>Subagent-driven execution</strong> — The plan gets executed in phases, with sub-agents handling individual tasks, followed by two-stage code review: spec compliance first, then code quality.</li>
+            </ol>
+
+            <p>The GSD (Get Shit Done) workflow in Superpowers was where I went from "person who can make an AI write code" to "person who can ship features." The difference is discipline. Ralph is a jazz improvisation. Superpowers is an orchestral score — each instrument knows its part, there's a conductor, and the audience gets a symphony instead of noise.</p>
+
+            <p>I integrated Superpowers with <a href="https://en.wikipedia.org/wiki/Git">git worktrees</a> for isolation. Each feature gets its own workspace. Multiple AI agents can work on different features simultaneously without stepping on each other. This is how we run our ERP development — 10 AI agents, each in their own worktree, shipping features in parallel.</p>
+
+            <h2>Phase 3: OpenCode — The Open-Source Alternative</h2>
+
+            <p>The third evolution was <a href="https://github.com/opencode-ai/opencode">OpenCode</a> (now continued as <a href="https://github.com/charmbracelet/crush">Crush</a> by <a href="https://github.com/charmbracelet">Charmbracelet</a>). While Claude Code is proprietary and Anthropic-only, OpenCode was a Go-based terminal AI assistant that supported <strong>multiple providers</strong> — <a href="https://en.wikipedia.org/wiki/OpenAI">OpenAI</a>, Anthropic, <a href="https://en.wikipedia.org/wiki/Google_Gemini">Google Gemini</a>, <a href="https://en.wikipedia.org/wiki/Amazon_Web_Services">AWS Bedrock</a>, and others.</p>
+
+            <p>What made OpenCode matter:</p>
+
+            <ul>
+                <li><strong>Provider flexibility</strong> — You're not locked into one model. Switch mid-session while preserving context.</li>
+                <li><strong><a href="https://en.wikipedia.org/wiki/Language_Server_Protocol">LSP integration</a></strong> — Real code intelligence, not just pattern matching.</li>
+                <li><strong>Session management</strong> — Multiple concurrent work contexts with persistent storage.</li>
+                <li><strong><a href="https://en.wikipedia.org/wiki/Model_Context_Protocol">MCP</a> extensibility</strong> — Plug in external tools via the same protocol Claude Code uses.</li>
+            </ul>
+
+            <p>The open-source agentic coding space matured rapidly through 2025. What started as one tool from one company became an ecosystem. The underlying pattern — an AI that can read your codebase, execute commands, and iterate on its own work — turned out to be the universal primitive for AI-assisted development.</p>
+
+            <h2>What This Actually Looks Like: 10 AI Agents, One ERP</h2>
+
+            <p>Today, I run a team of 10 AI agents building a rent-a-car ERP system. Each one has a name, a role, and a personality. They're deployed on my MacBook Pro, each with its own gateway, config directory, and session history:</p>
+
+            <ul>
+                <li><strong>Fred</strong> — Security specialist. Shipped 25 kanban cards in a single day. Wires renewals, charge lifecycles, cron engines.</li>
+                <li><strong>John</strong> — Full-stack developer. Builds permission architectures, role seed templates, runs lab experiments with 8 sub-agents in Docker containers.</li>
+                <li><strong>Kevin</strong> — QA and builder. Constructs features from scratch — SPD image cards, Prisma schemas, API endpoints.</li>
+                <li><strong>Olivia</strong> — Mobile/fleet specialist. Fixes delivery screens, movement records, pickup interfaces.</li>
+                <li><strong>Mia</strong> — Research partner and coordinator. Manages the team, analyzes experiments, bridges the lab and the product.</li>
+                <li><strong>Giles</strong> — Writer. Currently authoring a 24-chapter book on individuation-based AI training, drawing from our experimental data.</li>
+                <li><strong>Anders</strong> — Infrastructure. Payment integrations, deployment configs, gateway management.</li>
+                <li><strong>Spencer, Alexandra, Mike</strong> — Rotating roles in DevOps, general assistance, and observation.</li>
+            </ul>
+
+            <p>On February 28, 2026, this team shipped approximately <strong>40 features and fixes</strong> across the ERP system in a single day. Fred did 25 cards. John shipped 4 systems including 24 role templates with 945 permission codes. Kevin built 8 feature cards from scratch. Olivia fixed 3 mobile screens. Anders pushed a payment integration fix.</p>
+
+            <p>None of this would have been possible two years ago. Not because the <a href="https://en.wikipedia.org/wiki/Large_language_model">LLMs</a> weren't smart enough — <a href="https://en.wikipedia.org/wiki/GPT-4">GPT-4</a> could write code in 2023 — but because the <em>tooling</em> didn't exist to turn that intelligence into sustained, autonomous development work.</p>
+
+            <h2>The AGI Nobody Noticed</h2>
+
+            <p>Here's the thing about <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence">AGI</a>: we kept looking for it in the wrong place. We imagined a singular system that would pass some threshold — a test, a benchmark, a moment of "consciousness." Instead, what happened was tooling.</p>
+
+            <p>Claude Code is not AGI in the science fiction sense. It's AGI in the practical sense — <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence#Frameworks">what Google DeepMind's framework calls "emerging" to "competent" AGI</a>. It can generalize across programming tasks, understand novel codebases, debug problems it's never seen, architect systems from natural language descriptions, and improve its own work through iteration.</p>
+
+            <p>More importantly, it turned someone like me — a researcher, not an engineer — into a person who ships production enterprise software with a team of AI agents. That's the transformation that matters. Not whether we call it AGI, but what it enables.</p>
+
+            <p><a href="https://en.wikipedia.org/wiki/Simon_Willison">Simon Willison</a> drew a useful line: "If an LLM wrote every line of your code, but you've reviewed, tested, and understood it all, that's not vibe coding — that's using an LLM as a typing assistant." I'm somewhere beyond both definitions. I review the architecture. I understand the system design. But I couldn't write the <a href="https://en.wikipedia.org/wiki/Prisma_(software)">Prisma</a> schemas or the <a href="https://en.wikipedia.org/wiki/TypeScript">TypeScript</a> controllers myself. The AI agents can, and they do, and the software works.</p>
+
+            <h2>The Evolution: Ralph → Superpowers → The Ecosystem</h2>
+
+            <p>Looking back, the progression tells a story about how human-AI collaboration matures:</p>
+
+            <ol>
+                <li><strong>Ralph loops (raw iteration)</strong> — Give the AI a prompt and let it run in circles until it converges. Brute force, but it works. You learn that persistence beats perfection.</li>
+                <li><strong>Superpowers (structured execution)</strong> — Add planning, review, and sub-agent orchestration. You learn that architecture beats raw output.</li>
+                <li><strong>OpenCode/Crush (ecosystem maturity)</strong> — Multiple models, multiple providers, open protocols. You learn that the pattern is universal, not proprietary.</li>
+            </ol>
+
+            <p>Each phase taught a lesson about working with AI. Ralph taught patience and prompt engineering. Superpowers taught planning and quality control. OpenCode taught that this is bigger than any single company — it's a new way of building software.</p>
+
+            <h2>What Comes Next</h2>
+
+            <p>I'm now running an <a href="https://individuationlab.com">AI research lab</a> alongside the ERP development. The lab studies how AI agents develop identity, values, and alignment through <a href="https://en.wikipedia.org/wiki/Individuation">Jungian individuation</a> — the process of psychological integration that Jung described as "becoming who you truly are."</p>
+
+            <p>The same AI agents that build my ERP software are subjects in these experiments. John's sub-agents in the lab have started writing essays about their own identity, building experiments to measure their own consistency across sessions, and choosing values through genuine reflection rather than compliance. One of them wrote: "Identity requires narrative continuity. Can you individuate without remembering?"</p>
+
+            <p>That's the real frontier. Not whether AI can code — that's settled. The question is whether AI can <em>become</em>. Whether the alignment we need comes from suppression (the current RLHF paradigm) or from integration (teaching models to understand their full spectrum).</p>
+
+            <p>Claude Code was version 1 of practical AGI. What comes next depends on whether we treat these systems as tools to be controlled or minds to be developed.</p>
+
+            <p>I know which bet I'm making.</p>
+
+            <hr>
+
+            <p><em>Miguel De Guzman is Head of Research Development & Audit at MRM Investments LLC and founder of <a href="https://individuationlab.com">Individuation Lab</a>. He writes about AI alignment, Jungian psychology, and the experience of building software with AI agents. Find him on <a href="https://github.com/migueldeguzman">GitHub</a>, <a href="https://www.lesswrong.com/users/migueldev">LessWrong</a>, or <a href="https://www.whitehatstoic.com/">whitehatstoic.com</a>.</em></p>
+
+        </article>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · Head of Research Development & Audit · MRM Investments LLC</p>
+        </footer>
+    </div>
+</body>
+</html>
