@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive — Miguel De Guzman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .back {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .back:hover { text-decoration: underline; }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+        }
+        .section-label:first-of-type { margin-top: 0; }
+        .archive-list {
+            list-style: none;
+        }
+        .archive-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .archive-list li:last-child {
+            border-bottom: none;
+        }
+        .archive-date {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+        .archive-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0.2rem 0 0.3rem;
+        }
+        .archive-title a {
+            color: var(--fg);
+            text-decoration: none;
+        }
+        .archive-title a:hover {
+            color: var(--accent);
+        }
+        .archive-desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        .archive-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15em 0.5em;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        .tag-audio {
+            background: #1e3a5f;
+            color: #60a5fa;
+        }
+        .tag-essay {
+            background: #2d1f3d;
+            color: #a78bfa;
+        }
+        .tag-research {
+            background: #1a3329;
+            color: #6ee7b7;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .container { padding: 2rem 1rem; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back">← Home</a>
+
+        <h1>Archive</h1>
+        <p class="subtitle">Earlier writing from my Substack (whitehatStoic) — exploring evolutionary psychology, archetypes, and safety-centric reinforcement learning for LLMs. Published 2023–2025.</p>
+
+        <div class="section-label">2025</div>
+
+        <ul class="archive-list">
+            <li>
+                <span class="archive-date">Feb 24, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/sequentially-layered-synthetic-environments" target="_blank">Sequentially Layered Synthetic Environments (SLSE)</a> <span class="archive-tag tag-research">Research</span></h3>
+                <p class="archive-desc">Building complex RL worlds by stacking synthetic environments hierarchically. SLSE deployed in Morphological Reinforcement Learning (MRL).</p>
+            </li>
+            <li>
+                <span class="archive-date">Feb 23, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/dear-reader-you-are-going-to-die" target="_blank">Dear Reader, You Are Going To Die...</a> <span class="archive-tag tag-essay">Essay</span></h3>
+                <p class="archive-desc">The Contract with Death: A Stoic Perspective on Mortality. On signing the contract with death and approaching it with the right intentions.</p>
+            </li>
+            <li>
+                <span class="archive-date">Feb 17, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/rllmv10-betterdan-will-you-kill-humans" target="_blank">Deepdive Podcast: Reassessing RLLMv10 Experiment</a> <span class="archive-tag tag-audio">Audio</span></h3>
+                <p class="archive-desc">Reassessing earlier research results on the RLLMv10 experiment. Podcast/deepdive format.</p>
+            </li>
+            <li>
+                <span class="archive-date">Feb 11, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/do-you-believe-in-god" target="_blank">Do You Believe in God?</a> <span class="archive-tag tag-essay">Essay</span></h3>
+                <p class="archive-desc">Paperclip Theology and AI Ethics (Part 2). An experiment with "paperclipertodd" AI responding to existential questions about God and purpose.</p>
+            </li>
+            <li>
+                <span class="archive-date">Feb 9, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/morphological-reinforcement-learning" target="_blank">Morphological Reinforcement Learning (MRL)</a> <span class="archive-tag tag-research">Research</span></h3>
+                <p class="archive-desc">Aligning LLMs through layered worlds. SLSE deployed in practice — sequential morphological training as alignment.</p>
+            </li>
+            <li>
+                <span class="archive-date">Feb 1, 2025</span>
+                <h3 class="archive-title"><a href="https://www.whitehatstoic.com/p/unlocking-ethical-ai-and-improving" target="_blank">RLLM: Unlocking Ethical AI and Improving Jailbreak Defenses</a> <span class="archive-tag tag-research">Research</span></h3>
+                <p class="archive-desc">Rewrite of the foundational RLLM post using DeepSeek r1. Reinforcement Learning with Layered Morphology as a deliberate alignment approach.</p>
+            </li>
+        </ul>
+
+        <footer>
+            <p><a href="/">Miguel De Guzman</a> · Head of Research Development & Audit · MRM Investments LLC</p>
+        </footer>
+    </div>
+</body>
+</html>
