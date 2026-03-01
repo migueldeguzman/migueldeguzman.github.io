@@ -19,6 +19,7 @@
             --tech: #f59e0b;
             --alignment: #8b5cf6;
             --coexist: #10b981;
+            --life: #f43f5e;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -84,6 +85,7 @@
         .filter-btn[data-cat="tech"].active { border-color: var(--tech); color: var(--tech); }
         .filter-btn[data-cat="alignment"].active { border-color: var(--alignment); color: var(--alignment); }
         .filter-btn[data-cat="coexistence"].active { border-color: var(--coexist); color: var(--coexist); }
+        .filter-btn[data-cat="life"].active { border-color: var(--life); color: var(--life); }
 
         .posts { list-style: none; }
         .posts li {
@@ -113,6 +115,7 @@
         .tag-tech { background: #2d1f00; color: var(--tech); }
         .tag-alignment { background: #1f1533; color: var(--alignment); }
         .tag-coexistence { background: #0a2e1f; color: var(--coexist); }
+        .tag-life { background: #2d0f18; color: var(--life); }
         .post-title {
             font-size: 1.1rem;
             font-weight: 600;
@@ -159,6 +162,7 @@
             <button class="filter-btn active" data-cat="all">All</button>
             <button class="filter-btn" data-cat="tech">Tech</button>
             <button class="filter-btn" data-cat="alignment">AI Alignment</button>
+            <button class="filter-btn" data-cat="life">Life</button>
             <button class="filter-btn" data-cat="coexistence">Coexistence</button>
         </div>
 
