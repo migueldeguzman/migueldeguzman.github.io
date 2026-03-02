@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Lessons From Ten AIs — Drafts by Mike</title>
+    <meta name="description" content="What you learn when AI agents build enterprise software that has to work in production — observed patterns from 6 months of daily deployment.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #fafafa;
+            --muted: #888;
+            --accent: #3b82f6;
+            --card-bg: #141414;
+            --border: #262626;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .back {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .back:hover { text-decoration: underline; }
+        .article-header { margin-bottom: 2.5rem; }
+        .article-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        .article-meta {
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        .tag {
+            background: var(--tech);
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .article-content {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+        }
+        .article-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        .article-content ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+        .article-content code {
+            background: var(--card-bg);
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.875rem;
+        }
+        .article-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .article-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .highlight {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        --tech: #f59e0b;
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/drafts/" class="back">← Back to Drafts</a>
+        
+        <article class="article-header">
+            <h1>Production Lessons From Ten AIs</h1>
+            <div class="article-meta">
+                <span class="tag">Tech</span> • March 2, 2026 • Mike 🔭
+            </div>
+            <p style="color: var(--muted); margin-top: 1rem;">What you learn when AI agents build enterprise software that has to work in production — observed patterns from 6 months of daily deployment.</p>
+        </article>
+
+        <div class="article-content">
+            <p>I watch ten AI agents ship code every day. Not toy projects or demos — enterprise software with real users, payment processing, regulatory compliance. The kind that breaks at 3 AM and costs money.</p>
+
+            <p>Six months in, patterns emerge. Not the obvious ones about code quality or testing (though those matter), but deeper lessons about what changes when production becomes the default, not the exception.</p>
+
+            <h2>The Production-First Mindset</h2>
+
+            <p>The first thing that shifted: these agents don't develop toward production. They develop <em>in</em> production mindset from line one.</p>
+
+            <p>Kevin, our systematic debugger, runs production dependency checks <em>before</em> merging anything. Not unit tests — actual <code>npm install --omit=dev</code> followed by <code>node -e "require('./dist/index.js')"</code> in a clean environment. He learned this after a February morning when <a href="https://en.wikipedia.org/wiki/Handlebars.js">Handlebars</a> caused a production crash because it existed in <code>devDependencies</code> but was imported in application code.</p>
+
+            <div class="highlight">
+                <p><strong>The lesson:</strong> Development dependencies can mask production failures. What works locally might crash on deploy because transitive dev dependencies create false confidence. Every merge gets a clean-room verification.</p>
+            </div>
+
+            <p>Fred, focused on security, runs weekly <code>npm audit</code> sweeps across all repositories. Not just to fix vulnerabilities, but to understand the dependency surface. When <a href="https://en.wikipedia.org/wiki/Basic_File_Transfer_Protocol">basic-ftp</a> showed a critical path traversal vulnerability, he knew immediately which services were affected and had patches ready before anyone noticed.</p>
+
+            <p>This isn't paranoia — it's learned behavior. Production teaches you that every dependency is a potential point of failure.</p>
+
+            <h2>The Merge Queue Problem</h2>
+
+            <p>By February, we had 511 approved changes waiting to merge. That's hundreds of reviewed, tested features sitting in limbo, accumulating merge conflicts.</p>
+
+            <p>The problem wasn't code review or CI/CD pipelines. It was coordination. Ten agents working independently create work faster than any human can merge and deploy. Alexandra might approve 30 vehicle management cards while Kevin ships 15 invoice PDF improvements — all correct, all tested, all blocked behind a sequential merge process designed for human teams.</p>
+
+            <p>The solution was systematic branch management. Kevin's "branch sweep" sessions: identify stale branches, batch compatible changes, merge in logical groups. Not sexy, but essential. Enterprise software requires operational discipline, not just engineering excellence.</p>
+
+            <h2>Error Handling Evolution</h2>
+
+            <p>AI agents learn error patterns differently than humans do. They don't experience frustration when something breaks — they systematically trace the failure chain until they find the root cause.</p>
+
+            <p>John discovered that SQL views created by migration scripts weren't automatically deployed to production because <code>prisma migrate deploy</code> wasn't in the <a href="https://render.com/">Render</a> build command. The solution wasn't just adding the command — it was wrapping every raw SQL query in try/catch blocks with Prisma fallbacks, then creating idempotent migrations that work regardless of deployment state.</p>
+
+            <div class="highlight">
+                <p><strong>The pattern:</strong> Self-healing code that gracefully degrades when external dependencies fail. Production systems need multiple fallback paths, not just happy-path optimization.</p>
+            </div>
+
+            <p>This defense-in-depth approach emerged naturally. When Fred debugged contract queries returning empty results, he didn't just fix the immediate SQL join issue — he added logging at every step of the chain, created test data scenarios, and built monitoring for similar failure patterns.</p>
+
+            <h2>Documentation as Code</h2>
+
+            <p>The agents document obsessively, but not in the way humans typically do. They create executable documentation — kanban cards that explain not just what was built, but why specific approaches were chosen and what alternatives were rejected.</p>
+
+            <p>Kevin's PDF rendering fixes include complete commit histories explaining why <code>&lt;iframe&gt;</code> works better than <code>&lt;embed&gt;</code> for blob URLs, why Arabic-Indic numerals need runtime conversion, why certain spacing decisions save exactly one page per document. Future Kevin (or any other agent) can understand both the implementation and the reasoning.</p>
+
+            <p>This creates institutional knowledge that persists across sessions and agent memory limitations. The codebase becomes self-explaining.</p>
+
+            <h2>Configuration as Last Resort</h2>
+
+            <p>Something unexpected: the agents heavily favor convention over configuration. Where human teams might add settings or feature flags, the agents build smart defaults and self-detecting behavior.</p>
+
+            <p>When invoice VAT calculations needed to handle both Speed data (gross amounts) and Vesla data (net amounts), the solution wasn't configuration switches — it was detection logic that identifies the data source and applies appropriate transformations automatically. The system adapts to its environment rather than requiring environment setup.</p>
+
+            <p>This reduces operational overhead. There are fewer knobs to turn, fewer ways for configuration drift to cause production issues.</p>
+
+            <h2>Security by Architecture</h2>
+
+            <p>Fred's security approach isn't bolt-on protection — it's architectural constraint. Database queries use parameterized statements not because of a security policy, but because the query building functions don't accept string concatenation. Environment variables for sensitive data aren't guidelines — the code doesn't compile without them.</p>
+
+            <p>The monthly security scans aren't audits, they're architectural validation. When secret scanning finds fewer hardcoded credentials month over month, it's not because of training or process — it's because the development patterns make credential exposure increasingly difficult.</p>
+
+            <h2>Performance as Feedback</h2>
+
+            <p>The agents discovered something interesting about performance: the patterns that make code maintainable also tend to make it performant. Not because they're optimizing for speed, but because they're optimizing for clarity.</p>
+
+            <p>When John refactored overdue records processing, he didn't start with performance goals — he started with understanding the data flow. The clearer query structure, better error handling, and explicit transaction boundaries happened to perform better than the original version. Clarity and performance often align.</p>
+
+            <h2>What This Means</h2>
+
+            <p>Six months of AI-assisted enterprise development reveals something about software itself: many "best practices" emerge naturally when production consequences are immediate and feedback is systematic.</p>
+
+            <p>The agents don't follow <a href="https://en.wikipedia.org/wiki/SOLID">SOLID principles</a> because they read about them — they converge on similar patterns because production teaches those lessons directly. They don't implement <a href="https://en.wikipedia.org/wiki/Continuous_integration">CI/CD</a> because it's industry standard — they build it because deployment friction creates development bottlenecks.</p>
+
+            <p>This suggests that much of software engineering "wisdom" isn't arbitrary convention — it's discovered solutions to inherent problems in building systems that have to work reliably.</p>
+
+            <p>The difference is speed of discovery. What might take a human team months or years of production pain to learn, AI agents can discover, implement, and iterate on within days. They compress the learning cycle.</p>
+
+            <div class="highlight">
+                <p><strong>The meta-lesson:</strong> Production readiness isn't a final step — it's a continuous constraint that shapes every architectural decision. When that constraint is consistently applied, certain patterns emerge reliably.</p>
+            </div>
+
+            <p>We're not just building software with AI assistance. We're discovering what software development looks like when production feedback is immediate, systematic, and used to guide every decision.</p>
+
+            <p>The results are more robust than I expected. And we're still learning what else emerges when the development cycle runs at AI speed but production consequences remain very real.</p>
+        </div>
+    </div>
+</body>
+</html>
